@@ -1,0 +1,158 @@
+\documentclass[a4paper,url]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[small]{subfigure}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{halloweenmath}
+\usepackage{graphicx}
+\usepackage{ifthen}
+%\usepackage{times, courier, helvet, mathpple} %% for nice PDF fonts
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+
+% Change dimension of a page
+\usepackage{geometry}
+\geometry{a4paper, left = 30mm, right=30mm, top=30mm, bottom=30mm, headheight=1mm, headsep=1mm, footskip=15mm}
+
+
+
+% Draw with tikzpicture
+\usepackage{pgfplots}
+% line thickness: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick
+% line style:     dashed, loosely dashed, densely dashed, dotted, loosely dotted, densely dotted
+\tikzset{vertice/.style={circle, draw, minimum size=7mm, scale=0.8, fill=black!15}}
+\tikzset{edge/.style={-, black}}
+
+
+
+
+
+
+\newcommand {\rpf}{\begin{math}\rightarrow\end{math}}
+\newcommand {\ra}{\rightarrow}
+\newcommand {\epsi}{\begin{math}\epsilon\end{math}}
+
+\selectlanguage{german}
+
+\begin{document}
+\newcommand{\nat}{\mbox{I}\!\mbox{N}}
+
+\newcommand{\real}{\mbox{I}\!\mbox{R}}
+
+\newcounter{aufgabe_count}
+\setcounter{aufgabe_count}{1}
+\newcommand{\aufgabe}[2]{\vspace{3.5ex} {\noindent \bf\large Aufgabe
+\arabic{aufgabe_count}: \hspace{10pt}#1} \hspace{5pt}(#2 Punkte)\vspace{3pt}\\ 
+\stepcounter{aufgabe_count} 
+}
+
+%\topmargin0in
+
+\textheight55\baselineskip
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf Übungen zur Vorlesung\\
+Grundlagen des Internets\\
+Prof. Dr. Michael Menth
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf SS 2019\\
+Universität Tübingen\\
+\today %@@@Datum eintragen
+\end{flushright}
+\end{minipage}
+
+
+
+\vspace{5.0ex}
+\noindent
+
+\centerline{\huge \bf Übungsblatt 1}
+\centerline{\bf Lukas Günthner, 4124568, lukas.guenthner@student.uni-tuebingen.de}
+\centerline{\bf Vinhdo Doan, vinhdo.doan@student.uni-tuebingen.de}
+	\centerline{(War leider am Morgen der Abgabe nicht zu erreichen, deshalb fehlt die MatrklNr noch)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Aufgabe 3.3}
+\subsection*{3.3.1}
+Der ARP-Request besteht aus einem Layer-1 Header und der tatsächlichen Layer-2 ARP-Request. Der ARP-Header enthält folgende Felder:
+\begin{itemize}
+	\item Hardware type, gibt an welches Protokoll auf dem Link-Layer verwendet wird.
+	\item Protocol type, gibt an für welches Internetprotkoll die ARP-Request gesendet wird.
+	\item Hardware size, Größe der MAC-Adresse
+	\item Protocol zsie, Größe der IP-Adresse
+	\item Opcode, Operation code 1 für request, 2 für response
+	\item Sender MAC adress, eigene MAC-Adresse
+	\item Sender IP adress, eigene IP-Adresse
+	\item Target MAC adress, bei request 00:00:00:00:00:00 da broadcast
+	\item Target IP adress, Ziel IP-Adresse
+\end{itemize}
+
+\subsection*{3.3.2}
+Der ARP-Response besteht aus einem Layer-1 Header und der tatsächlichen Layer-2 ARP-Response. Der ARP-Header enthält folgende Felder:
+\begin{itemize}
+	\item Hardware type, gibt an welches Protokoll auf dem Link-Layer verwendet wird.
+	\item Protocol type, gibt an für welches Internetprotkoll die ARP-Request gesendet wird.
+	\item Hardware size, Größe der MAC-Adresse
+	\item Protocol zsie, Größe der IP-Adresse
+	\item Opcode, Operation code 1 für request, 2 für response
+	\item Sender MAC adress
+	\item Sender IP adress
+	\item Target MAC adress
+	\item Target IP adress
+\end{itemize}
+
+\subsection*{3.3.3}
+%TODO: TODODOODODODODODOODODODODODODOODODODODODOODODODODODODODO
+
+\subsection*{3.3.4}
+Ja, da eine ARP-Request ans ganze Netzwerk gebroadcastet wird und keine Sicherheitsmechanismen (z.B. Authentifizierung) implementiert, ist es anfällig für bspw. Spoofing und kann damit für man-in-the-middle attacken ausgenutzt werden.
+
+\subsection*{3.3.5}
+Nein, da alle Hosts alle ARP-Replies in ihre ARP-Tabelle abspeicher, egal ob sie überhaupt eine ARP-Request verschickt haben oder nicht. \footnote{Siehe \href{https://en.wikipedia.org/wiki/ARP_spoofing#ARP_vulnerabilities}{https://en.wikipedia.org/wiki/ARP\_spoofing\#ARP\_vulnerabilities}}
+
+\subsection*{3.3.6}
+Es müssen zwei ARP-Pakete versendet werden.
+\begin{enumerate}
+	\item A broadcast 'Who is B' (request)
+	\item B antwortet mit seiner MAC-Adresse (reply)
+\end{enumerate}
+Zuerst schickt A den ARP-Rrquest broadcast, B schickt dann seine ARP-Reply mit seiner MAC-Adresse und A speichert diese in seiner ARP-Tabelle. C empfängt diese Reply auch und speichert genauso die MAC-Adresse von B in seiner ARP-Tabelle.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

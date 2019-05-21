@@ -1,0 +1,203 @@
+\documentclass[a4paper,url]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[german]{babel}
+\usepackage[small]{subfigure}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{halloweenmath}
+\usepackage{graphicx}
+\usepackage{ifthen}
+%\usepackage{times, courier, helvet, mathpple} %% for nice PDF fonts
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+
+% Change dimension of a page
+\usepackage{geometry}
+\geometry{a4paper, left = 30mm, right=30mm, top=30mm, bottom=30mm, headheight=1mm, headsep=1mm, footskip=15mm}
+
+
+
+% Draw with tikzpicture
+\usepackage{pgfplots}
+% line thickness: ultra thin, very thin, thin, semithick, thick, very thick, ultra thick
+% line style:     dashed, loosely dashed, densely dashed, dotted, loosely dotted, densely dotted
+\tikzset{vertice/.style={circle, draw, minimum size=7mm, scale=0.8, fill=black!15}}
+\tikzset{edge/.style={-, black}}
+
+
+
+
+
+
+\newcommand {\rpf}{\begin{math}\rightarrow\end{math}}
+\newcommand {\ra}{\rightarrow}
+\newcommand {\epsi}{\begin{math}\epsilon\end{math}}
+
+\selectlanguage{german}
+
+\begin{document}
+\newcommand{\nat}{\mbox{I}\!\mbox{N}}
+
+\newcommand{\real}{\mbox{I}\!\mbox{R}}
+
+\newcounter{aufgabe_count}
+\setcounter{aufgabe_count}{1}
+\newcommand{\aufgabe}[2]{\vspace{3.5ex} {\noindent \bf\large Aufgabe
+\arabic{aufgabe_count}: \hspace{10pt}#1} \hspace{5pt}(#2 Punkte)\vspace{3pt}\\ 
+\stepcounter{aufgabe_count} 
+}
+
+%\topmargin0in
+
+\textheight55\baselineskip
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf Übungen zur Vorlesung\\
+Grundlagen des Internets\\
+Prof. Dr. Michael Menth
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf SS 2019\\
+Universität Tübingen\\
+\today %@@@Datum eintragen
+\end{flushright}
+\end{minipage}
+
+
+
+\vspace{5.0ex}
+\noindent
+
+\centerline{\huge \bf Übungsblatt 1}
+\centerline{\bf Lukas Günthner, 4124568, lukas.guenthner@student.uni-tuebingen.de}
+\centerline{\bf Vinhdo Doan, vinhdo.doan@student.uni-tuebingen.de}
+	\centerline{(War leider am Morgen der Abgabe nicht zu erreichen, deshalb fehlt die MatrklNr noch)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{1.1.1}
+\begin{itemize}
+	\item IP: 3
+	\item TCP: 4
+	\item Twisted-Pair Kabel: 1
+	\item DNS: 7
+	\item ARP: 2
+	\item Token ring: 2
+	\item RTSP: 7
+\end{itemize}
+
+\section*{1.1.2}
+\begin{itemize}
+	\item Router: 3
+	\item IEE 802.11: 1
+	\item IEE 802.3: 1+2
+	\item Bridge: 2
+	\item Browser: 7
+	\item Hub: 1
+	\item PPP: 2
+	\item MPLS: 2+3
+\end{itemize}
+
+\section*{1.1.3}
+Physical + Data Link werden zu Network Access Schicht. Das Session und Presentation Layer sind nicht mehr im TCP/IP Schichtenmodell vorhanden.
+Applikationen dürfen direkt auf IP aufsetzen also dem Internet Layer im TCP/IP Modell.
+
+\section*{1.2.1}
+Das Internet ist ein zusammenschluss aus verschiedenen Netzwerken (LAN's). Zum Beispiel wird das Heimnetzwerk über das ISP Netzwerk mit den restlichen Netzen im Internet zusammengschlossen.
+
+\section*{1.2.2}
+Local ISP stellt den Zugang zum Internet für ein lokales Netzwerk (Heimnetz) bereit.
+Regional ISP's stellt dann den Zugang zum überregionalen Internet für die lokalen ISP's bereit.
+
+\section*{1.2.3}
+\begin{itemize}
+	\item local ISP: Router
+	\item regional ISP: 1\&1
+\end{itemize}
+
+\section*{1.2.4}
+\begin{align}
+	\frac{n\cdot h}{M + (n \cdot h)}
+\end{align}
+Es wird die Datenmenge die für alle Header verwendet wird durch die komplette Datenmenge (Daten + Header) geteilt.
+
+\section*{1.3.1}
+\begin{itemize}
+	\item A: Layer 2, MAC
+	\item B: Layer 2, MAC
+	\item C: Layer 3, IP
+	\item D: Layer 4, TCP
+\end{itemize}
+
+\section*{1.3.2}
+\begin{tabular}{c|c|c|c|c}
+	& (A) & (B) & (C) & (D) \\
+	\hline
+	\hline
+	Protokoll Schicht 4 & & & & TCP \\
+	\hline
+	Protokoll Schicht 3 & & & IP & \\
+	\hline
+	Protokoll Schicht 2 & MAC & MAC & & \\
+	\hline
+	\hline
+	Zielport (Schicht 4) &  &  & & \\
+	\hline
+	Quelladresse Schicht 3 & 193.196.20.254 &  & & 134.2.3.254\\
+	\hline
+	Zieladresse Schicht 3 & 193.196.20.254 &  & & 134.2.3.1 \\
+	\hline
+	Quelladresse Schicht 2 & 3f:d2:5e:86:aa:0a & d5:08:f4:67:38:95 & ce:34:30:97:b4:1e & 75:c4:3c:eb:2d:fa\\
+	\hline
+	Zieladresse Schicht 2 & d5:08:f4:67:38:95 & ce:34:30:97:b4:1e & fb:30:89:60:35:0e & 9d:76:bc:e7:00:b1\\
+\end{tabular}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
